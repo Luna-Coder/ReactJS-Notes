@@ -2,13 +2,14 @@
 ___
 ## Intro To JSX
 
-JSX produces React “elements”.
+JSX produces React “elements”:
 
 ```jsx
 const element = <h1>Hello, world!</h1>;
 ```
 
-### JSX is an Expression Too
+### JSX Is An Expression Too
+
 After compilation, JSX expressions become regular JavaScript function calls and evaluate to JavaScript objects.
 
 This means that you can use JSX inside of `if` statements and `for` loops, assign it to variables, accept it as arguments, and return it from functions.
@@ -94,10 +95,12 @@ const element = <h1>Hello, world</h1>;
 Unlike browser DOM elements, React elements are plain objects, and are cheap to create. 
 
 ### Rendering an Element into the DOM
+
 Let’s say there is a `<div>` somewhere in your HTML file.
 ```html
 <div id="root"></div>
 ```
+
 To render a React element into a root DOM node, pass both to `ReactDOM.render()`.
 ```jsx
 const element = <h1>Hello, world</h1>;
@@ -109,7 +112,7 @@ React elements are `immutable`. Once you create an element, you can’t change i
 
 With our knowledge so far, the only way to update the UI is to create a new element, and pass it to `ReactDOM.render()`.
 
-Consider this ticking clock example.
+Consider this ticking clock example:
 ```jsx
 function tick() {
   const element = (
@@ -132,13 +135,15 @@ ___
 Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called `props`) and return React elements describing what should appear on the screen.
 
 ### Function and Class Components
+
+This function is a valid React component because it accepts a single `props` object argument with data and returns a React element:
+
 ```jsx
 // Function Component
 function Welcome(props) {
   return <h1>Hello, {props.name}</h1>;
 }
 ```
-This function is a valid React component because it accepts a single `props` object argument with data and returns a React element.
 
 ```jsx
 // Class Component
