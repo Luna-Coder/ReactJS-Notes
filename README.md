@@ -161,7 +161,7 @@ const element = <Welcome name="Sara" />;
 ```
 When React sees an element representing a user-defined component, it passes JSX attributes to this component as a single object. We call this object `props`.
 
-For example, this code renders “Hello, Sara” on the page.
+For example, this code renders “Hello, Sara” on the page:
 ```jsx
 function Welcome(props) {
   return <h1>Hello, {props.name}</h1>;
@@ -184,9 +184,10 @@ Let’s recap what happens in this example:
 4. React DOM efficiently updates the DOM to match `<h1>Hello, Sara</h1>`.
 
 ### Composing Components
+
 Components can refer to other components in their output. This lets us use the same component abstraction for any level of detail.
 
-For example, we can create an App component that renders Welcome many times.
+For example, we can create an `<App />` component that renders `<Welcome />` many times.
 ```jsx
 function Welcome(props) {
   return <h1>Hello, {props.name}</h1>;
@@ -209,17 +210,19 @@ ReactDOM.render(
 ```
 
 ### Props are Read-Only
+
 Whether you declare a component as a function or a class, it must never modify its own props.
 
 **All React components must act like pure functions with respect to their props.**
 
 ___
 
-## State and Lifecycle
+## State And Lifecycle
 
 State is similar to `props`, but it is private and fully controlled by the component.
 
-### Converting a Function to a Class
+### Converting A Function To A Class
+
 You can convert a function component like `Clock` to a class in five steps:
 
 1. Create an ES6 class, with the same name, that extends `React.Component`.
@@ -243,6 +246,7 @@ class Clock extends React.Component {
   }
 }
 ```
+
 `Clock` is now defined as a class rather than a function.
 
 The `render()` method will be called each time an update happens, but as long as we render `<Clock />` into the same DOM node, only a single instance of the `Clock` class will be used. 
@@ -250,6 +254,7 @@ The `render()` method will be called each time an update happens, but as long as
 This lets us use additional features such as local state and lifecycle methods.
 
 ### Adding Local State to a Class
+
 We will move the `date` from props to state in three steps:
 
 **1.** Replace `this.props.date` with `this.state.date` in the `render()` method.
@@ -317,7 +322,8 @@ ReactDOM.render(
 ```
 Next, we’ll make the Clock set up its own timer and update itself every second.
 
-### Adding Lifecycle Methods to a Class
+### Adding Lifecycle Methods To A Class
+
 In applications with many components, it’s very important to free up resources taken by the components when they are destroyed.
 
 We want to set up a timer whenever the Clock is rendered to the DOM for the first time. This is called “mounting” in React.
@@ -333,6 +339,7 @@ componentDidMount() {
     );
 }
 ```
+
 The `componentDidMount()` method runs after the component output has been rendered to the DOM. This is a good place to set up a timer.
 
 While `this.props` is set up by React itself and `this.state` has a special meaning, you are free to add additional fields to the class manually if you need to store something that doesn’t participate in the data flow (like a timer ID).
@@ -342,6 +349,7 @@ componentWillUnmount() {
     clearInterval(this.timerID);
 }
 ```
+
 We will tear down the timer in the `componentWillUnmount()` lifecycle method.
 
 Finally, we will implement a method called `tick()` that the `Clock` component will run every second.
@@ -354,6 +362,7 @@ tick() {
     });
 }
 ```
+
 Here's the final result:
 ```jsx
 class Clock extends React.Component {
@@ -407,6 +416,7 @@ Let’s quickly recap what’s going on and the order in which the methods are c
 **5.** If the `Clock` component is ever removed from the DOM, React calls the `componentWillUnmount()` lifecycle method so the timer is stopped.
 
 ### Using State Correctly
+
 There are three things you should know about `setState()`.
 
 ##### (1) Do Not Modify State Directly
